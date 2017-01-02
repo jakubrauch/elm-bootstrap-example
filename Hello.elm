@@ -11,8 +11,9 @@ module Hello exposing (..)
 
 -- IMPORTS
 -- all dependencies that are required for our program (here it will be mainly Html and its dependencies).
-import Html exposing (Html, div, text, input, button, p, program)
+import Html exposing (Html, Attribute, div, text, input, button, p, node, program)
 import Html.Events exposing (onClick, onInput)
+import Html.Attributes exposing (..)
 
 {-
 A standard Elm program is composed of three parts: model, update, view. In very general terms:
@@ -50,30 +51,46 @@ init = ({ items = ["first", "second"]
         }, Cmd.none)
 
 -- MESSAGES
+-- Let's define list of events that can happen in the application
 type Msg a = NoOp | Change a | Add a | Remove a
 
 -- VIEW
+-- Converts model to Html page
 view : Model -> Html (Msg Item) {- Converts given model to html and produces messages tagged with Msg TODO -}
 view model =
-    div [] ((List.map(\m -> p [] [text m, button [onClick (Remove m)] [text "remove"]]) model.items) ++
-        [ input [onInput Change] []
-        , button [onClick (Add model.newItem)] [text "add"]
-        ])
+    div [ class "container" ] [
+        stylesheet "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css",
+        div [ class "row" ] [
+            div [ class "col-xs-12 col-sm-offset-3 col-sm-6"] (
+                (List.map(\m -> p [] [text m, button [class "btn btn-danger", onClick (Remove m)] [text "remove"]]) model.items) ++
+                [ input [onInput Change] []
+                , button [class "btn btn-primary", onClick (Add model.newItem)] [text "add"]
+                ]
+            )
+        ]
+    ]
+-- Stylesheet only for generating link to bootstrap
+stylesheet : String -> Html msg
+stylesheet loc=
+    node "link" [ (href loc), (rel "stylesheet"), (type_ "text/css") ] []
 
 -- UPDATE
+-- Applies the given Msg to the Model
 update : Msg String -> Model -> (Model, Cmd (Msg String))
 update msg model =
     case msg of
         NoOp -> ( model, Cmd.none )
-        Change i -> ( { model | newItem = i }, Cmd.none) -- TODO
+        Change i -> ( { model | newItem = i }, Cmd.none) -- Cmd: TODO
         Add i -> ( { model | items = model.newItem :: model.items, newItem = "" }, Cmd.none)
-        Remove i -> ( { model | items = List.filter ((/=)i) model.items }, Cmd.none) {- So far we do nothing for other cases -}
+        Remove i -> ( { model | items = List.filter ((/=)i) model.items }, Cmd.none)
 
 -- SUBSCRIPTIONS
+-- No subscriptions for the moment, but you can handle mouse/keyboard later
 subscriptions : Model -> Sub (Msg a)
-subscriptions model = Sub.none {- No subscriptions for the moment, but you can handle mouse/keyboard later -}
+subscriptions model = Sub.none
 
 -- MAIN
+-- Wires all up.
 {- Program's signature:
 program
   : { init : (model, Cmd msg)
