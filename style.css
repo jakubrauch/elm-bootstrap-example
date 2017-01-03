@@ -1,0 +1,38 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #555;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.body > .row {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.body > .row:first-child {
+    margin-top: 20px;
+}
+
+.body > .row button {
+    float: right;
+}
+
+.item {
+    height: 34px;
+}
+
+.item > span {
+    position: absolute;
+    top: 50%;
+    font-size: 12pt;
+    margin-top: -6pt;
+}
+
+.color-invert {
+    background-color: #555;
+    color: #fff;
+}
