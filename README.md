@@ -29,3 +29,11 @@ https://bendyworks.com/blog/elm-frontend-right-now-updated-for-0-18
 Here we have a much more advanced todo list application by Brad Grzesiak and he uses some custom made bootstrap
 references. This convinced me to stick with the basic approach and reference bootstrap's styling manually. As long as 
 it is not much work in Elm I prefer to keep it as basic as possible.
+
+
+## Utilities
+Here are some useful tools for Elm apps:
+ - IntelliJ elm-plugin - http://durkiewicz.github.io/elm-plugin
+ - elm-format - https://github.com/avh4/elm-format
+   - IntelliJ support - https://github.com/durkiewicz/elm-plugin/issues/9
+   
