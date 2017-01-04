@@ -13,7 +13,7 @@ module Hello exposing (..)
 
 -- IMPORTS
 -- all dependencies that are required for our program (here it will be mainly Html and its dependencies).
-import Html exposing (Html, Attribute, div, text, input, button, span, p, h1, node, program)
+import Html exposing (Html, Attribute, div, a, text, input, button, span, p, h1, node, program)
 import Html.Events exposing (onClick, onInput)
 import Html.Attributes exposing (..)
 
@@ -65,44 +65,50 @@ type Msg a = ChangeText a | AddItem a | RemoveItem a
 -- simplified using named functions but I wanted to present the complete view hierarchy.
 view : Model -> Html (Msg Item)
 view model =
-    div [ class "container-fluid" ]
-        [ node "link" -- this is a <link rel="stylesheet" href="..."/> element
-            [ (href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"), (rel "stylesheet") ] []
+    div []
+        [ node "link" [ (href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"), (rel "stylesheet") ] []
         , node "link" [ (href "style.css"), (rel "stylesheet"), (type_ "text/css") ] []
         , node "link" [ (href "https://fonts.googleapis.com/css?family=Open+Sans|Roboto"), rel ("stylesheet") ] []
-        , div [ class "header" ] [
+        , div [ class "container-fluid" ] [
             div [ class "row" ]
-                [ div [ class "col-xs-12 bg-primary" ]
-                    [ h1 [] [ text "Elm Bootstrap Task List" ] ]
-                ]
+              [ div [ class "col-xs-12 bg-primary" ]
+                  [ h1 [] [ text "Elm Bootstrap Task List" ] ]
+              ]
             ]
-        , div [ class "body" ]
-            (div [ class "row" ] -- new item row
-                [ div [ class "col-xs-12 col-sm-offset-3 col-sm-6" ]
-                    [ div [ class "input-group" ]
-                        [ input [ value model.newItem, onInput ChangeText, class "form-control", placeholder "Item" ] []
-                        , span [ class "input-group-btn" ]
-                            [ button [class "btn btn-primary", onClick (AddItem model.newItem)]
-                                [ span [ class "glyphicon glyphicon-plus" ] [] ]
+        , div [ class "container" ]
+            [ div [ class "body" ]
+                (div [ class "row" ] -- new item row
+                    [ div [ class "col-xs-12 col-sm-offset-3 col-sm-6" ]
+                        [ div [ class "input-group" ]
+                            [ input [ value model.newItem, onInput ChangeText, class "form-control", placeholder "Item" ] []
+                            , span [ class "input-group-btn" ]
+                                [ button [class "btn btn-primary", onClick (AddItem model.newItem)]
+                                    [ span [ class "glyphicon glyphicon-plus" ] [] ]
+                                ]
                             ]
                         ]
                     ]
-                ]
-             ::
-            List.map -- list of existing items
-                ( \m -> div [ class "row" ] [
-                    div [ class "col-xs-12 col-sm-offset-3 col-sm-6" ]
-                        [ div [ class "item" ] [
-                            span [] [ text m ]
-                            , button [ class "btn btn-danger text-right", onClick (RemoveItem m) ]
-                                [ span [ class "glyphicon glyphicon-remove" ] [] ]
+                 ::
+                List.map -- list of existing items
+                    ( \m -> div [ class "row" ] [
+                        div [ class "col-xs-12 col-sm-offset-3 col-sm-6" ]
+                            [ div [ class "item" ] [
+                                span [] [ text m ]
+                                , button [ class "btn btn-danger text-right", onClick (RemoveItem m) ]
+                                    [ span [ class "glyphicon glyphicon-remove" ] [] ]
+                                ]
                             ]
                         ]
-                    ]
+                    )
+                    model.items
                 )
-                model.items
-            )
+            ]
+        , div [ class "footer color-invert" ]
+            [ div []
+                [ a [ href "https://www.github.com/jakubrauch/elm-bootstrap-example" ] [ span [] [ text "https://github.com/jakubrauch/elm-bootstrap-example" ] ] ]
+            ]
         ]
+
 
 -- UPDATE
 -- Applies the given Msg to the Model (+ may generate some side-effects using Cmd but we don't have any in our example)

@@ -1,11 +1,13 @@
 # elm-bootstrap-example
 
-Work in progress - created a simple todo-list - no bootstrap added yet.
+Work in progress - created a simple todo-list.
 
 ## First step - create a task list:
 
-By the time I was finished writing code that would reflect in the model all input field changes I suddenly realized that
- the only thing missing in my app is addition this text to a list - a trivial job!
+By the time I finished writing code responsible for updating model on each input change
+ I suddenly realized that the only thing missing in my app is addition of this text to a list.
+ No testing, debugging, checking edge cases, just making sure that whatever is entered is then
+ moved to the list of tasks - a trivial job!
  Everything else is already implemented and verified by the compiler.
   
 If you ever liked working with enums in Java because they gave you the confidence of what are the possible
@@ -36,4 +38,3 @@ Here are some useful tools for Elm apps:
  - IntelliJ elm-plugin - http://durkiewicz.github.io/elm-plugin
  - elm-format - https://github.com/avh4/elm-format
    - IntelliJ support - https://github.com/durkiewicz/elm-plugin/issues/9
-   
