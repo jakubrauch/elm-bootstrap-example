@@ -10,7 +10,7 @@ to make the source code straightforward for the Elm newcomers.
 
 Install Elm (follow: https://guide.elm-lang.org/install.html) and clone this repo:
 ```
-git clone git https://github.com/jakubrauch/elm-bootstrap-example.git
+git clone git https://github.com/jakubrauch/elm-bootstrap-tasklist.git
 ```
 Navigate to the project folder (where TaskList.elm file is located) and run:
 
