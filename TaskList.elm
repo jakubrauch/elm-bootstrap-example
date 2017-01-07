@@ -9,7 +9,7 @@ to give the full tutorial a try. -}
 
 -- MODULE
 -- definition of the module we create (module name must correspond to file name and its location)
-module Hello exposing (..)
+module TaskList exposing (..)
 
 -- IMPORTS
 -- all dependencies that are required for our program (here it will be mainly Html and its dependencies).

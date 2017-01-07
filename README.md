@@ -1,27 +1,24 @@
 # elm-bootstrap-example
 
-A Task List implemented with Elm enriched with Bootstrap styling (no Bootstrap JS).
+A Task List implemented in Elm with Bootstrap styling (without Bootstrap JavaScript components).
 
-In general, Task List is a perfect case for getting started with a new UI language. It requires the
-page to be interactive, update its state but also remains fairly simple and its goal
-is straightforward for everyone.
-
-This particular implementation does not involve any backend systems or storage. There are
- no submodules nor additional functions. All to keep the source code clear for the newcomers,
- yet something that shows a popular frontend framework in use.
- This is just plain Elm code with some Bootstrap formatting to show how a typical 
- Task List case translates to an Elm reality.
+The functionality is very simple - an in-memory Task List with options to add and remove unique entries.
+The code is very basic - there are no submodules or additional functions. The purpose is 
+to make the source code straightforward for the Elm newcomers. 
  
 ## Start
 
-Install elm (https://guide.elm-lang.org/install.html), clone this repo, navigate to 
-the project folder (elm-bootstrap-example) and run:
+Install Elm (follow: https://guide.elm-lang.org/install.html) and clone this repo:
+```
+git clone git https://github.com/jakubrauch/elm-bootstrap-example.git
+```
+Navigate to the project folder (where TaskList.elm file is located) and run:
 
 ```
 elm-reactor
 ```
 
-This will start up a server and expose your project files via browser:
+This will start up a server and expose your project files via a browser:
 
 ```
 elm-reactor 0.18.0
@@ -29,12 +26,12 @@ Listening on http://localhost:8000`
 ```
 
 Go to your browser and navigate to http://localhost:8000/Hello.elm. It will compile your code and
-will present the Task List.
+present the Task List that you can modify.
 
 ## Structure
  
 Application has three files:
- - Hello.elm - Elm implementation of the Task List web page (incl. Bootstrap styles)
+ - TaskList.elm - Elm implementation of the Task List web page (incl. Bootstrap styles)
  - elm-package.json - Configuration of dependencies for the project
  - style.css - CSS styling not covered by Bootstrap
 
@@ -57,23 +54,18 @@ http://package.elm-lang.org/packages/circuithub/elm-bootstrap-html/latest
 https://github.com/pzavolinsky/elm-bootstrap
 
 However, I was looking for a more generic approach where I could just use plain bootstrap styling, without it being
-hidden behind some additional library yet I did not need to use the fancy JavaScript tools it provides. 
-I also prefer to have the latest bootstrap version available at a hand. Then I stumbled 
-upon this article:
+hidden behind an additional library. I also did not need Bootstrap's JavaScript extensions, at least not yet.
+This approach lets me have the latest Bootstrap version available at a hand. Having searched a bit more
+I stumbled upon the following article:
 
 https://bendyworks.com/blog/elm-frontend-right-now-updated-for-0-18
 
-There we have a much more advanced Task List application by Brad Grzesiak and he uses some custom made Bootstrap
-references. This convinced me to stick with the basic approach and reference Bootstrap's styling manually. As long as 
-it is not much work in Elm I prefer to keep it as basic as possible.
-
-
+There we have a much more advanced Task List written by Brad Grzesiak and he also uses just plain <link> tags to
+Bootstrap resources. 
 
 ### Third step - Final styling
 
-The final styling of the components has been located in style.css. I have added only a few 
-custom classes to the Hello.elm file and tried to keep entire custom styling limited to the
-style.css file.
+The finishing touches included writing custom classes in style.css.
 
 
 ## Utilities
@@ -85,35 +77,45 @@ Here are some useful tools for Elm apps:
 ## Impressions
 
 ### First Impressions - Elm logic
-Well, I am amazed by Elm. Soon after starting coding I was already able to synchronize webpage model state with input 
-form field. While this was not a one-liner it was fun to write because any issues were clearly reported
-to me by the compiler. Once this part was written I suddenly realized that I am almost done implementing entire
-logic. The only thing missing in my app was just to add this text to a list of entries in the model. This part
-went even quicker than I thought - the page was ready in no time. 
+Brilliant! With some background in functional programming it won't take much time to catch on with
+Elm's syntax. Once you grasp the basics of its Html architecture (Model, View, Update) you are good to 
+go with your first webpage. You specify the model and write a view function to represent it as
+Html. With that in place you proceed with update functions that will keep your view 
+and model in moving. Writing code that updates form field text in the application model 
+was fairly simple to do right. Appending that text to an array of items was even simpler. 
+What came to me as suprise, though, was that this was it - the page was ready, reacting
+to changes, rendering correctly and working as expected. No testing, debugging had to be made -
+I simply followed what compiler suggested. It was so much more convenient than fighting runtime
+issues that are so common in most modern JS frameworks. Most of the things you normally fight at runtime 
+Elm will not allow you to compile in the first place. If you attempt to hit a screw with a hammer Elm will
+interrupt to instruct you to use a screwdriver instead. Your tools will stay intact, as 
+will your application.
 
-No testing, debugging, checking edge cases, just reacting to compiler's suggestions. I used to code in OCaml
- but it did not give me the same confidence as Elm does. I know a bit of Haskell and Elm resembles Haskell a lot with
- its syntax which I like. However, I find Elm much more modern and user-friendly than its 26-old ancestor. I am
- looking forward to getting to know it.
+I used to code in OCaml but it did not give me the same confidence as Elm does. 
+I know a bit of Haskell and Elm resembles Haskell a lot with its syntax, which I like
+and I also find Elm much more modern and user-friendly than its 26-old ancestor. All in all,
+I am looking forward to getting to know it better.
  
 ### Second Impression - Bootstrap
 
 If you know Bootstrap then adding it to the Elm's Html hierarchy is very straightforward and the Elm Html tags
-translate directly to corresponding plain Html tags. Not much more to add here, except that Bootstrap JS is not
-simple to integrate. Elm introduces its own apprach to interoperability with existing JavaScript library and I have
-not found an Elm module that has a complete set of Bootstrap features covered.
+translate directly to corresponding plain Html tags. Not much more to add here, except that from what I have read
+Bootstrap's JavaScript components are not in Elm yet. The thing is they are not so simple to integrate. 
+Elm introduces its own apprach to interoperability with existing JavaScript libraries and there are still some 
+bridges that need to be built. Truth be told, I have not found an Elm module that has a complete set of Bootstrap 
+features covered, yet. If you find one - please let me know.
 
 ### Third Impression - Final styling
 
 The last step was adding some finishing touches to the layouts. This meant writing some CSS
 class definitions and surprisingly it was the toughest part for me. My CSS knowledge may have
-become a bit rusty over last year but I did not expect to find it that intimidating.
-For me it was like driving off
-a freshly opened tarmac highway to a wet, muddy, unpaved dirt. Every little thing suddenly started to take way more 
-time than it would expect it to take. Some heights not calculated, some aligns not working, 
-some blocks not acting as blocks. Nothing was like in the pure world of functional Elm.  
+become a bit rusty over last year but I did not expect to find it that tiring.
+For me it was like driving off a freshly opened tarmac highway to a wet, muddy, unpaved dirt. 
+Every little thing suddenly started to take way more time than it would expect it to take. 
+Some heights not calculated, some aligns not working, some blocks not acting as blocks. 
+Nothing was like in the crystal-clear world of functional Elm.  
 
 This somewhat concludes my overall impression of the UI reality of past decade... The gap between Elm and CSS showed
 me how different this new functional UI language is from the other, older UI technologies. My opinion
 may be biased towards Elm because I do like functional languages and I do like Haskell (which Elm resembles) so 
-I would like to encourage you to try it out yourself and share your impressions.
+I would really like to encourage you to try it out yourself and share your experiences.
